@@ -1,0 +1,38 @@
+type Mutation {
+  playerChallengeResponse(input: PlayerChallengeResponseInput!): PlayerChallengeResponsePayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+input PlayerChallengeResponseInput {
+  color: String!
+  clientMutationId: String
+}
+
+type PlayerChallengeResponsePayload {
+  todoEdge: String
+  viewer: User
+  clientMutationId: String
+}
+
+type Query {
+  viewer: User
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+type User implements Node {
+  # The ID of an object
+  id: ID!
+  level: Int
+  sequence: [Int]
+  playerChallengeResponse: [Int]
+}
